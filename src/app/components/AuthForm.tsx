@@ -5,6 +5,9 @@ import Input from "@/components/inputs/Input";
 import Button from "@/app/components/Button";
 import AuthSocialButton from "@/app/components/AuthSocialButton";
 import {BsGithub, BsGoogle} from "react-icons/bs";
+import axios from "axios";
+import {toast} from "react-hot-toast";
+import {signIn} from "next-auth/react";
 
 type Variant = 'LOGIN' | 'REGISTER';
 
@@ -32,18 +35,39 @@ const AuthForm = () => {
 		setIsLoading(true);
 		
 		if (variant === 'REGISTER') {
-			// Axios Register
+			axios.post('/api/register', data).catch(() => toast.error("Something went wrong.")).finally(() => setIsLoading(false))
 		}
 		
 		if (variant === 'LOGIN') {
-			// NextAuth SignIn
+			signIn('credentials', {
+				...data,
+				redirect: false
+			}).then((callback) => {
+				if (callback?.error) {
+					toast.error('Invalid Credentials :(');
+				}
+				
+				if (callback?.ok && !callback?.error) {
+					toast.success("You're logged in!")
+				}
+			}).finally(() => setIsLoading(false))
 		}
 	}
 	
 	const socialAction = (action: String) => {
 		setIsLoading(true);
 		
-		// NextAuth Social Sign
+		
+		signIn(`${action}`, {redirect: false})
+			.then((callback) => {
+				if (callback?.error) {
+					toast.error('Invalid Credentials :(');
+				}
+				
+				if (callback?.ok && !callback?.error) {
+					toast.success("You're logged in!")
+				}
+			}).finally(() => setIsLoading(false))
 	}
 	
 	return (
@@ -56,8 +80,10 @@ const AuthForm = () => {
 					{variant === "REGISTER" ?
 						<Input label='Full Name' disabled={isLoading} register={register} id='name' type='text' errors={errors}/>
 						: <></>}
-					<Input label='Email address' disabled={isLoading} register={register} id='email' type='email' errors={errors}/>
-					<Input label='Password' disabled={isLoading} register={register} id='password' type='password' errors={errors}/>
+					<Input label='Email address' disabled={isLoading} register={register} id='email' type='email'
+					       errors={errors}/>
+					<Input label='Password' disabled={isLoading} register={register} id='password' type='password'
+					       errors={errors}/>
 					{variant === "REGISTER" ?
 						<Input
 							label='Confirm Password'
