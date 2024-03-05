@@ -54,10 +54,10 @@ const AuthForm = () => {
 					onSubmit={handleSubmit(onSubmit)}
 				>
 					{variant === "REGISTER" ?
-						<Input label='Full Name' register={register} id='name' type='text' errors={errors}/>
+						<Input label='Full Name' disabled={isLoading} register={register} id='name' type='text' errors={errors}/>
 						: <></>}
-					<Input label='Email address' register={register} id='email' type='email' errors={errors}/>
-					<Input label='Password' register={register} id='password' type='password' errors={errors}/>
+					<Input label='Email address' disabled={isLoading} register={register} id='email' type='email' errors={errors}/>
+					<Input label='Password' disabled={isLoading} register={register} id='password' type='password' errors={errors}/>
 					{variant === "REGISTER" ?
 						<Input
 							label='Confirm Password'
@@ -65,6 +65,7 @@ const AuthForm = () => {
 							id='confirm-password'
 							type='password'
 							errors={errors}
+							disabled={isLoading}
 						/>
 						: <></>}
 					<Button disabled={isLoading} fullWidth
