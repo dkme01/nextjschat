@@ -1,10 +1,16 @@
 'use client';
 
-import React from 'react';
+import React, {FC} from 'react';
 import useRoutes from "@/app/hooks/useRoutes";
 import DesktopItem from "@/app/components/sidebar/DesktopItem";
+import {User} from "next-auth";
+import Avatar from "@/app/components/Avatar";
 
-const DesktopSidebar = () => {
+interface DesktopSidebarProps {
+	currentUser: User;
+}
+
+const DesktopSidebar: FC<DesktopSidebarProps> = ({currentUser}) => {
 	const routes = useRoutes();
 	const [isOpen, setIsOpen] = React.useState(false);
 	
@@ -43,6 +49,21 @@ const DesktopSidebar = () => {
 						/>
 					))}
 				</ul>
+			</nav>
+			<nav
+				className="
+					mt-4
+					flex
+					flex-col
+					justify-between
+					items-center
+				"
+			>
+				<div onClick={() => setIsOpen(true)} className="cursor-pointer hover:opacity-75 transition">
+					<Avatar
+						user={currentUser}
+					/>
+				</div>
 			</nav>
 		</div>
 	);
