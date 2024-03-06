@@ -1,26 +1,27 @@
 'use client';
 
-import React, { useCallback, useState } from 'react'
-import { Dialog } from '@headlessui/react'
-import { FiAlertTriangle } from 'react-icons/fi'
+import {FC, useCallback, useState} from 'react'
+import {Dialog} from '@headlessui/react'
+import {FiAlertTriangle} from 'react-icons/fi'
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import {useRouter} from 'next/navigation';
 import Modal from '@/app/components/modals/Modal';
 import Button from '@/app/components/buttons/Button';
 import useConversation from '@/app/hooks/useConversation';
-import { toast } from 'react-hot-toast';
+import {toast} from 'react-hot-toast';
 
 interface ConfirmModalProps {
 	isOpen?: boolean;
 	onClose: () => void;
 }
 
-const ConfirmModal: React.FC<ConfirmModalProps> = ({
-	                                                   isOpen,
-	                                                   onClose
-                                                   }) => {
+const ConfirmModal: FC<ConfirmModalProps> = (
+	{
+		isOpen,
+		onClose
+	}) => {
 	const router = useRouter();
-	const { conversationId } = useConversation();
+	const {conversationId} = useConversation();
 	const [isLoading, setIsLoading] = useState(false);
 	
 	const onDelete = useCallback(() => {
@@ -77,7 +78,9 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
 					</Dialog.Title>
 					<div className="mt-2">
 						<p className="text-sm text-gray-500">
-							Are you sure you want to delete this conversation? This action cannot be undone.
+							Are you sure you want to do this?
+							<br/>
+							This action cannot be undone.
 						</p>
 					</div>
 				</div>
