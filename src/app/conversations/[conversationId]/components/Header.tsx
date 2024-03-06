@@ -55,7 +55,7 @@ const Header: FC<HeaderProps> = ({conversation}) => {
 			>
 				<div className="flex gap-3 items-center">
 					<Link
-						href='/conversations'
+						href={'/conversations'}
 						className='
 						lg:hidden
 						block

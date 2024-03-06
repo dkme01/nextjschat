@@ -15,6 +15,6 @@ async function Sidebar({children}: { children: ReactNode }) {
 			</main>
 		</div>
 	);
-};
+}
 
 export default Sidebar;
