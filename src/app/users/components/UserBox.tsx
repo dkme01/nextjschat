@@ -1,10 +1,12 @@
 "use client";
 
-import React, {FC, useCallback, useState} from 'react';
 import axios from "axios";
-import {User} from "@prisma/client";
+import {FC, useCallback, useState} from 'react';
 import {useRouter} from "next/navigation";
+import {User} from "@prisma/client";
+
 import Avatar from "@/app/components/Avatar";
+import {toast} from "react-hot-toast";
 
 interface UserBoxProps {
 	data: User;
@@ -23,6 +25,7 @@ const UserBox: FC<UserBoxProps> = ({data}) => {
 			.then(data => {
 				router.push(`/conversations/${data.data.id}`);
 			})
+			.catch(() => toast.error("Something went wrong"))
 			.finally(() => setIsLoading(false));
 	}, [data, router])
 	
