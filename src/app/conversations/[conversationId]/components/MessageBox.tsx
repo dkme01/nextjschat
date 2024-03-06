@@ -23,7 +23,6 @@ const MessageBox: FC<MessageBoxProps> = ({isLast, data}: MessageBoxProps) => {
 		.join(', ');
 	
 	const container = clsx("flex gap-3 p-4", isOwn && "justify-end");
-	const avatar = clsx(isOwn && "order-2");
 	const body = clsx("flex flex-col gap-2", isOwn && "items-end");
 	const message = clsx(
 		"text-sm w-fit overflow-hidden",
@@ -34,9 +33,6 @@ const MessageBox: FC<MessageBoxProps> = ({isLast, data}: MessageBoxProps) => {
 	
 	return (
 		<div className={container}>
-			<div className={avatar}>
-				<Avatar user={data.sender}/>
-			</div>
 			<div className={body}>
 				<div className="flex items-center gap-1">
 					<div className="text-sm text-gray-500">
@@ -65,6 +61,11 @@ const MessageBox: FC<MessageBoxProps> = ({isLast, data}: MessageBoxProps) => {
 						<div>{data.body}</div>
 					)}
 				</div>
+				{isLast && isOwn && seenList.length > 0 && (
+					<div className="text-xs font-light text-gray-500">
+						{`Seen by ${seenList}`}
+					</div>
+				)}
 			</div>
 		</div>
 	);
