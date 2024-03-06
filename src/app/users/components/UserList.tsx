@@ -1,6 +1,6 @@
 'use client';
 
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {User} from "@prisma/client";
 import UserBox from "@/app/users/components/UserBox";
 

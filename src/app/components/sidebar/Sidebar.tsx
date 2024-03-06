@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import {ReactNode} from 'react';
 import DesktopSidebar from "./DesktopSidebar";
 import MobileFooter from "@/app/components/sidebar/MobileFooter";
 import getCurrentUser from "@/app/actions/getCurrentUser";

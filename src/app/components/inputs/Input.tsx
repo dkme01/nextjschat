@@ -1,5 +1,5 @@
 'use client';
-import React, {FC} from 'react';
+import {FC} from 'react';
 import clsx from 'clsx';
 import {FieldErrors, FieldValues, UseFormRegister} from 'react-hook-form';
 

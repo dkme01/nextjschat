@@ -1,6 +1,6 @@
 'use client';
 
-import React, {FC} from 'react';
+import {FC} from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
 
